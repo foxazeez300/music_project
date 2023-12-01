@@ -12,12 +12,10 @@ void setup() {
   song1 = minim.loadFile(pathway + Pentatonix);
 } //Endsetup
 //
-void draw() {
-
-} //End draw 
+void draw() {} //End draw 
 //
 void keyPressed() {
-
+  song1.loop(0);
 } //EndPressed
 //
 void mousePressed() {
