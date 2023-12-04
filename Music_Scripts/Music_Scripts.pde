@@ -25,12 +25,14 @@ void setup() {
 } //Endsetup
 //
 void draw() {
-
+  //Note: logical operators could be nested IFs
+  if (song1.isLooping() && song1.loopCount()!=-1) println("there are", song1.loopCount(), "loops left.");
+  if (song1.isLooping() && song1.loopCount()==-1) println("Looping Infinitely");
 } //End draw 
 //
 void keyPressed() {
   if (key=='P' || key=='p') song1.play();
-  //
+  //Note "9" is assumed to be massive! "simulate Infinite"
   println(key);
   if (key=='1' || key=='9'){ //Loop Button
   String keystr = String.valueOf(key);
@@ -38,6 +40,7 @@ void keyPressed() {
   int loopNum = int(keystr);
   song1.loop(loopNum); //Parameter is number of repeats
   }
+  if (key=='l' || key=='L') song.loop(); //Infinite loop, no pro
 } //EndPressed
 //
 void mousePressed() {
