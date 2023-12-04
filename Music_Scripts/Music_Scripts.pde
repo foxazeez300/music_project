@@ -27,7 +27,8 @@ void setup() {
 void draw() {
   //Note: logical operators could be nested IFs
   if (song1.isLooping() && song1.loopCount()!=-1) println("there are", song1.loopCount(), "loops left.");
-  if (song1.isLooping() && song1.loopCount()==-1) println("Looping Infinitely");
+  if (song1.isLooping() && song1.loopCount()==-1) println("Looping Infinitely");   
+  if (song1.isPlaying() && !song1.islooping() ) println("Play Once");
 } //End draw 
 //
 void keyPressed() {
