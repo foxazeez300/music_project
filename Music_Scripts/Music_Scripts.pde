@@ -14,7 +14,7 @@ void setup() {
   size(600, 700);
   //display Algorithm
   minim = new Minim(this); //load from data directory, loadFile should also load from
-  String pathway = "../ Music/";
+  String pathway = "Music/";
   String Pentatonix = "Pentatonix - Carol of the Bells.mp3";
   String extension = ".mp3";
   String path = sketchPath( pathway + Pentatonix ); //Absolute Path
@@ -24,12 +24,20 @@ void setup() {
   //song1.loop(0);
 } //Endsetup
 //
-void draw() {} //End draw 
+void draw() {
+
+} //End draw 
 //
 void keyPressed() {
-  if (key==' ' || key==' ') song1.play();
-  //song1.loop(0);
-  //if () .play(); //Parameter is milli-seconds from start of audio file to start playing (illustrate with examples)
+  if (key=='P' || key=='p') song1.play();
+  //
+  println(key);
+  if (key=='1' || key=='9'){ //Loop Button
+  String keystr = String.valueOf(key);
+  println(keystr);
+  int loopNum = int(keystr);
+  song1.loop(loopNum); //Parameter is number of repeats
+  }
 } //EndPressed
 //
 void mousePressed() {
