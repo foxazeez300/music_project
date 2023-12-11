@@ -11,7 +11,7 @@ Minim minim; //creates object to acces all functions
 AudioPlayer song1; //creates "Play List" variable holding extensions WAV, AIFF, AU, SN
 //
 void setup() {
-  size(512, 200, P3D);
+  size (600, 700);
   //display Algorithm
   minim = new Minim(this); //load from data directory, loadFile should also load from
   String pathway = "Music/";
