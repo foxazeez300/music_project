@@ -9,9 +9,10 @@ import ddf.minim.ugens.*;
 //Global Variables
 Minim minim; //creates object to acces all functions
 AudioPlayer song1; //creates "Play List" variable holding extensions WAV, AIFF, AU, SN
+AudioMetaData songMetaData1; //Stores everything from PlayList Properties TAB (.mp3)
 //
 void setup() {
-  size (600, 700);
+  size (500, 600);
   //display Algorithm
   minim = new Minim(this); //load from data directory, loadFile should also load from
   String pathway = "Music/";
@@ -21,8 +22,32 @@ void setup() {
   song1 = minim.loadFile(pathway + Pentatonix);
   println(path);
   song1 = minim.loadFile( path );
+  songMetaData1 = song1.getMetaData();
   //song1.loop(0);
-  textFont(createFont("Arial", 12));
+   //
+  //Meta Data Println Testing
+  //For Prototyping, print all information to the console first
+  //Verifying Meta Data, 18 println's 
+  //Repeat: println("?", songMetaData1.?() );
+  println("File Name", songMetaData1.fileName() ); //Data Correct, Verified in Console
+  //Must use pure Java at OS Level to list fileName before loading Playlist
+  println("Song Length (in milliseconds)", songMetaData1.length() );
+  println("Song Length (in seconds)", songMetaData1.length()/1000 ); 
+  println("Song Length (in minutes & seconds)", songMetaData1.length()/1000/60, "minutes", ( songMetaData1.length()/1000 - ( songMetaData1.length()/1000/60)*60 ), "seconds" ); //Gets Formula
+  println("Song Title", songMetaData1.title() );
+  println("Author", songMetaData1.author() );
+  println("Composer", songMetaData1.composer() );
+  println("Orchestra", songMetaData1.orchestra() );
+  println("Album", songMetaData1.album() );
+  println("Disk", songMetaData1.disc() );
+  println("Publisher", songMetaData1.publisher() );
+  println("Date Released", songMetaData1.date() );
+  println("Copyright", songMetaData1.copyright() );
+  println("Comments", songMetaData1.comment() );
+  println("Lyrics", songMetaData1.lyrics() ); //OPTIONAL: Music App Sing Along
+  println("Track", songMetaData1.track() );
+  println("Genre", songMetaData1.genre() );
+  println("Encoded", songMetaData1.encoded() );
 } //Endsetup
 //
 void draw() {
@@ -33,7 +58,7 @@ void draw() {
   if (song1.isPlaying() && !song1.isLooping() ) println ("Play Once");
   //
   //debugging fast forward and fast rewind
-  println("song position", song1.position(), "song Length", song1.length() );
+  //println("song position", song1.position(), "song Length", song1.length() );
   //
 } //End draw
 //
@@ -48,6 +73,7 @@ void keyPressed() {
     song1.loop(loopNum); //Parameter is number of repeats
   }
   if (key=='L' || key=='l') song1.loop(); //Infinite loop, no pro
+  //
   if (key=='M' || key=='m') { //Mute Button
     //Mute Behaviour: stops electricy to speakers, does not stop file
     //Note: mute has no built-in pause button, no built-in rewind button
@@ -70,12 +96,21 @@ void keyPressed() {
   if ( key=='F' || key=='f' ) song1.skip( 0 ); //SKIP forward 1 second (1000 milliseconds)
   if ( key=='R' || key=='r' ) song1.skip( 1000 ); //SKIP  backawrds 1 second, notice negative, (-1000 milliseconds)
   //
-  //Simple STOP behaviour: ask if .playing() & .pause() & .rewind(), or rewind()
-  if (key=='S' | key=='s') {
+  //Simple STOP Behaviour: ask if .playing() & .pause() & .rewind(), or .rewind()
+  if ( key=='S' | key=='s' ) {
     if ( song1.isPlaying() ) {
       song1.pause(); //auto .rewind()
     } else {
-      song1.rewind();//ERROR, doesn't play
+      song1.rewind(); //Not Necessary
+    }
+  }
+  //
+  //Simple Pause Behaviour: .pause() & hold .position(), then PLAY
+  if ( key=='Y' | key=='y' ) {
+    if ( song1.isPlaying()==true ) {
+      song1.pause(); //auto .rewind()
+    } else {
+      song1.play(); //ERROR, doesn't play
     }
   }
 } //End keyPressed
