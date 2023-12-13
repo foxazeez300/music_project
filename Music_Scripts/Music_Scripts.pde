@@ -22,13 +22,16 @@ void setup() {
   minim = new Minim(this); //load from data directory, loadFile should also load from
   String pathway = "Music/";
   String Pentatonix = "Pentatonix - Carol of the Bells.mp3";
+  String Sleeping = "The_Sleeping_Prophet.mp3";
+  String Jazz = "This_is_a_Jazz_Space.mp3";
   String extension = ".mp3";
   String path = sketchPath( pathway + Pentatonix ); //Absolute Path
   println(path);
   song[0] = minim.loadFile( path );
   songMetaData[0] = song[0].getMetaData();
+  generalFont = createFont ("ArialMT", 55); //Must also Tools / Create Font / Find Font / Do Not Press "OK"
   //song1.loop(0);
-   //
+  //
   //Meta Data Println Testing
   //For Prototyping, print all information to the console first
   //Verifying Meta Data, 18 println's 
@@ -62,8 +65,17 @@ void draw() {
   if (song[0].isPlaying() && !song[0].isLooping() ) println ("Play Once");
   //
   //debugging fast forward and fast rewind
-  //println("song position", song1.position(), "song Length", song1.length() );
+  //println("song position", song[0].position(), "song Length", song[0].length() );
   //
+  // songMetaData1.title()
+  rect(width*1/4, height*0, width*1/2, height*3/10); //mistake
+  fill(purple); //Ink
+  textAlign (CENTER, CENTER); //Align X&Y, see Processing.org / Reference
+  //Values: [LEFT | CENTER | RIGHT] & [TOP | CENTER | BOTTOM | BASELINE]
+  int size = 10; //Change this font size
+  textFont(generalFont, size); //Change the number until it fits, largest font size
+  text(songMetaData[0].title(), width*1/4, height*0, width*1/2, height*3/10);
+  fill(255); //Reset to white for rest of the program
 } //End draw
 //
 void keyPressed() {
@@ -119,7 +131,6 @@ void keyPressed() {
   }
 } //End keyPressed
 //
-void mousePressed() {
-} //End mousePressed
+void mousePressed() {} //End mousePressed
 //
 //End MAIN Program
