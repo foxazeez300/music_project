@@ -14,7 +14,7 @@ int numberOfSongs = 3; //Number of Files in Folder, OS to count
 int numberOfSoundEffects = 1; //Number of Files in Folder, OS to count
 AudioPlayer[] song = new AudioPlayer[ numberOfSongs ]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
 AudioPlayer[] soundEffect = new AudioPlayer[ numberOfSoundEffects ]; //Playlist for Sound Effects
-AudioMetaData[] songMetaData = new AudioMetaData[ numberOfSongs ]; //Stores everything from PlayList Properties TAB (.mp3)
+AudioMetaData[] songMetaData = new AudioMetaData[ numberOfSongs ]; //same as above
 PFont generalFont;
 color purple = #2C08FF;
 //
@@ -23,12 +23,15 @@ void setup() {
   //display Algorithm
   minim = new Minim(this); //load from data directory, loadFile should also load from
   String pathway = "Music/";
-  String Pentatonix = "Pentatonix - Carol of the Bells.mp3";
-  String Sleeping = "The_Sleeping_Prophet.mp3";
-  String Jazz = "This_is_a_Jazz_Space.mp3";
-  String extension = ".mp3";
-  String path = sketchPath( pathway + Pentatonix ); //Absolute Path
-  println(path);
+  String directory = sketchPath( pathway ); //Absolute Path
+  println("Main directory to Music Folder", directory);
+  file = new File(directory);
+  int fileCount = file.list().length;
+  println("File Count of the Music Folder", fileCount);
+  File[] files = file.listFiles();//String of fill directies
+  println();
+  printArray(files);
+  //
   song[0] = minim.loadFile( path );
   songMetaData[0] = song[0].getMetaData();
   generalFont = createFont ("ArialMT", 55); //Must also Tools / Create Font / Find Font / Do Not Press "OK"
@@ -133,6 +136,7 @@ void keyPressed() {
   }
 } //End keyPressed
 //
-void mousePressed() {} //End mousePressed
+void mousePressed() {
+} //End mousePressed
 //
 //End MAIN Program
