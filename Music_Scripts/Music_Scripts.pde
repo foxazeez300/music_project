@@ -1,3 +1,4 @@
+import java.io.*;
 //Library: use sketch / import
 import ddf.minim.*;
 import ddf.minim.analysis.*;
@@ -7,6 +8,7 @@ import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 //
 //Global Variables
+File file; 
 Minim minim; //creates object to access all functions
 int numberOfSongs = 3; //Number of Files in Folder, OS to count
 int numberOfSoundEffects = 1; //Number of Files in Folder, OS to count
