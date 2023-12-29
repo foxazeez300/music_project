@@ -131,7 +131,7 @@ void keyPressed() {
     if ( song[0].isPlaying()==true ) {
       song[0].pause(); //auto .rewind()
     } else {
-      son[0]1.play(); //ERROR, doesn't play
+      song[0].play(); //ERROR, doesn't play
     }
   }
 } //End keyPressed
