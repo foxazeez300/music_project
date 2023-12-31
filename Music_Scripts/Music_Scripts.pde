@@ -175,51 +175,43 @@ void keyPressed() {
   if ( key==CODED && keyCode==RIGHT ) { //NEXT
   } //End NEXT
   //
-  /* Broken KeyBinds
+  //Broken KeyBinds
    //
-   if ( key>='1' || key<='9' ) { //Loop Button, previous (key=='1' || key=='9')
-   //Note: "9" is assumed to be massive! "Simulate Infinite"
-   String keystr = String.valueOf(key);
-   //println(keystr);
-   int loopNum = int(keystr); //Java, strongly formatted need casting
-   song[0].loop(loopNum); //Parameter is number of repeats
+  if (key >= '1' && key <= '9') { 
+  // Loop Button, previous (key=='1' || key=='9')
+  // Note: "9" is assumed to be massive! "Simulate Infinite"
+  String keystr = String.valueOf(key);
+  int loopNum = int(keystr); // Java, strongly formatted need casting
+  playList[currentSong].loop(loopNum); // Parameter is the number of repeats
+ }
+  if (key == 'L' || key == 'l') playList[currentSong].loop(); // Infinite Loop, no parameter OR -1
    //
-   }
-   if ( key=='L' || key=='l' ) song[0].loop(); //Infinite Loop, no parameter OR -1
-   //
-   if ( key=='M' || key=='m' ) { //MUTE Button
-   //MUTE Behaviour: stops electricty to speakers, does not stop file
-   //NOTE: MUTE has NO built-in PUASE button, NO built-in rewind button
-   //ERROR: if song near end of file, user will not know song is at the end
-   //Known ERROR: once song plays, MUTE acts like it doesn't work
-   if ( song[0].isMuted() ) {
-   //ERROR: song might not be playing
-   //CATCH: ask .isPlaying() or !.isPlaying()
-   song[0].unmute();
-   } else {
-   //Possible ERROR: Might rewind the song
-   song[0].mute();
-   }
-   } //End MUTE
+   if (key == 'M' || key == 'm') {
+  // MUTE Button
+  // MUTE Behaviour: stops electricity to speakers, does not stop file
+  if (playList[currentSong].isMuted()) {
+    playList[currentSong].unmute();
+  } else {
+    playList[currentSong].mute();
+  }
+ }//End MUTE
    //
    //Possible ERROR: FF rewinds to parameter milliseconds from SONG Start
    //Possible ERROR: FR rewinds to parameter milliseconds from SONG Start
    //How does this get to be a true ff and fr button
    //Actual .skip() allows for varaible ff & fr using .position()+-
-   if ( key=='F' || key=='f' ) song[0].skip( 0 ); //SKIP forward 1 second (1000 milliseconds)
-   if ( key=='R' || key=='r' ) song[0].skip( 1000 ); //SKIP  backawrds 1 second, notice negative, (-1000 milliseconds)
+   if (key == 'F' || key == 'f') playList[currentSong].skip(1000); // SKIP forward 1 second (1000 milliseconds)
+   if (key == 'R' || key == 'r') playList[currentSong].skip(-1000); // SKIP backwards 1 second, notice negative, (-1000 milliseconds)
    //
-   
    //
-   //Simple Pause Behaviour: .pause() & hold .position(), then PLAY
-   if ( key=='Y' | key=='y' ) {
-   if ( song[0].isPlaying()==true ) {
-   song[0].pause(); //auto .rewind()
-   } else {
-   song[0].play(); //ERROR, doesn't play
-   }
-   }
-   */
+  // Simple Pause and Play Behavior: .pause() & hold .position(), then PLAY
+  if (key == 'Y' || key == 'y') {
+  if (playList[currentSong].isPlaying()) {
+    playList[currentSong].pause(); // Pause if currently playing
+  } else {
+    playList[currentSong].play(); // Resume play if paused
+  }
+}
 } //End keyPressed
 //
 void mousePressed() {
